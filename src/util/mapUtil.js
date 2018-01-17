@@ -44,12 +44,12 @@ export const addMarker = (location,name) => {
     map:MAP
   });
   marker.content=name;
-  MAP.setFitView();
+  // MAP.setFitView();
   return marker;
 };
 
 var positionPicker
-export const startPositionPicker = (AMapUI) => {
+export const startPositionPicker = (AMapUI,cb) => {
   AMapUI.loadUI(['misc/PositionPicker'], function(PositionPicker) {
 
     positionPicker = new PositionPicker({
@@ -60,6 +60,7 @@ export const startPositionPicker = (AMapUI) => {
       console.log(positionResult);
 
       store.commit('RECORD_ADDRESS',{latitude:positionResult.position.lat,longitude:positionResult.position.lng})
+      cb();
     });
     positionPicker.on('fail', function(positionResult) {
       console.log(positionResult);

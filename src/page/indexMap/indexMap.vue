@@ -48,17 +48,18 @@ export default {
           zoom:11,
           center: [116.397428, 39.90923]
         });
+        var self = this;
+
 
         initMap(map);
         this.INIT_MAP(map);
-        startPositionPicker(AMapUI);
-
-
+        startPositionPicker(AMapUI,function () {
+          self.getfood();
+        });
 
         Geolocation(function (rep) {
             store.commit('RECORD_ADDRESS',{latitude:rep.position.lat,longitude:rep.position.lng});
-            this.getfood;
-            console.log( this.getfood);
+            self.getfood();
           } ,
           this.onError);
 
@@ -94,12 +95,11 @@ export default {
             return sortobj
         },
         ...mapState([
-          'MAP'
+          'MAP','geohash','latitude','longitude'
         ]),
     },
 
     methods:{
-        //点击图标刷新页面
         reload(){
             window.location.reload();
         },
@@ -108,18 +108,20 @@ export default {
             console.log("错误信息",rep);
         },
         getfood:() => {
-          msiteFoodTypes(this.geohash).then(res => {
-            console.log(res)
-            let resLength = res.length;
-            let resArr = [...res]; // 返回一个新的数组
-            let foodArr = [];
-            for (let i = 0, j = 0; i < resLength; i += 8, j++) {
-              foodArr[j] = resArr.splice(0, 8);
-            }
-            this.foodTypes = foodArr;
-          });
+            console.log(this);
 
-          var r= shopList(this.latitude, this.longitude, this.offset, '', this.restaurantCategoryIds, this.sortByType, this.deliveryMode, this.supportIds );
+//          msiteFoodTypes(self.geohash).then(res => {
+//            console.log(res)
+//            let resLength = res.length;
+//            let resArr = [...res]; // 返回一个新的数组
+//            let foodArr = [];
+//            for (let i = 0, j = 0; i < resLength; i += 8, j++) {
+//              foodArr[j] = resArr.splice(0, 8);
+//            }
+//            this.foodTypes = foodArr;
+//          });
+
+          var r= shopList(store.latitude, store.longitude, store.offset, '', "", "","" );
           r.then(function (list) {
             console.log(list);
 

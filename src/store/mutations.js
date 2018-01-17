@@ -43,6 +43,7 @@ export default {
 	}) {
 		state.latitude = latitude;
 		state.longitude = longitude;
+    state.geohash = latitude+","+longitude
 	},
 
 	[RECORD_SHOPDETAIL](state, detail) {
