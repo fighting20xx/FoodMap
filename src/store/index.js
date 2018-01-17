@@ -36,6 +36,7 @@ const state = {
 
 
   MAP:null,
+  AMapUI:null,
   Totalwidth:"0",
   Totalhegiht:"0",
 }

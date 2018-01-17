@@ -28,6 +28,7 @@ import {
 	SAVE_QUESTION,
 	ADD_ADDRESS,
 	BUY_CART,
+  INIT_MAP,
 } from './mutation-types.js'
 
 import {setStore, getStore} from '../config/mUtils'
@@ -240,5 +241,11 @@ export default {
 	[BUY_CART](state, price) {
 		state.cartPrice = price;
 	},
+
+  //创建新地图
+  [INIT_MAP](state, MAP) {
+    state.MAP = MAP;
+  },
+
 
 }
