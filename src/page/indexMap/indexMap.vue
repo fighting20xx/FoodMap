@@ -121,7 +121,7 @@ export default {
 //            this.foodTypes = foodArr;
 //          });
 
-          var r= shopList(store.latitude, store.longitude, store.offset, '', "", "","" );
+          var r= shopList(store.state.latitude, store.state.longitude, store.offset, '', "", "","" );
           r.then(function (list) {
             console.log(list);
 

@@ -5,6 +5,7 @@ import {
 export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 	type = type.toUpperCase();
 	url = baseUrl + url;
+  data.consumer_key=7284397484
 
 	if (type == 'GET') {
 		let dataStr = ''; //数据拼接字符串
@@ -35,7 +36,7 @@ export default async(url = '', data = {}, type = 'GET', method = 'fetch') => {
 				value: JSON.stringify(data)
 			})
 		}
-		
+
 		try {
 			const response = await fetch(url, requestConfig);
 			const responseJson = await response.json();
