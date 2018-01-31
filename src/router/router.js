@@ -1,5 +1,5 @@
 import App from '../App'
-
+//const indexMap = require('../page/indexMap/indexMap');    这种方式的也可以，   可能下面的是按需加载把
 const indexMap = r => require.ensure([], () => r(require('../page/indexMap/indexMap')), 'indexMap');
 const home = r => require.ensure([], () => r(require('../page/home/home')), 'home')
 const city = r => require.ensure([], () => r(require('../page/city/city')), 'city')
@@ -48,7 +48,15 @@ const find = r => require.ensure([], () => r(require('../page/find/find')), 'fin
 const download = r => require.ensure([], () => r(require('../page/download/download')), 'download')
 
 
+/*
 
+const download1 = function (r) {
+  return require.ensure([],  function () {
+     return  r(require('../page/download/download'))
+  }
+ , 'download1')
+};
+ * */
 
 export default [{
     path: '/',

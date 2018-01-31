@@ -123,7 +123,7 @@ export default {
 
           var r= shopList(store.state.latitude, store.state.longitude, store.offset, '', "", "","" );
           r.then(function (list) {
-            console.log(list);
+             console.log(list);
 
             list.forEach(function (value,index) {
               addMarker(value.location,value.name);

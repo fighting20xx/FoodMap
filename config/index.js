@@ -25,8 +25,6 @@ module.exports = {
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
         context: [ //代理路径
-            '/shopping',
-
             '/ugc',
             '/v1',
             '/v2',
@@ -37,7 +35,7 @@ module.exports = {
             '/promotion',
             '/eus',
             '/payapi',
-            '/*',
+            '/shopping',
         ],
         proxypath: 'http://openapi.ele.me',
         // CSS Sourcemaps off by default because relative paths are "buggy"
