@@ -1,10 +1,17 @@
 import Vue from 'vue'
-import VueRouter from 'vue-router'
-import routes from './router/router'
+import router from '@/router/index'
 import store from './store/'
-import {routerMode} from './config/env'
+
 import './config/rem'
 import FastClick from 'fastclick'
+import App from './App.vue'
+import iview from 'iview';
+
+
+Vue.use(iview);
+
+
+
 
 if ('addEventListener' in document) {
     document.addEventListener('DOMContentLoaded', function() {
@@ -12,25 +19,10 @@ if ('addEventListener' in document) {
     }, false);
 }
 
-Vue.use(VueRouter)
-const router = new VueRouter({
-	routes,
-	mode: routerMode,
-	strict: process.env.NODE_ENV !== 'production',
-	scrollBehavior (to, from, savedPosition) {
-	    if (savedPosition) {
-		    return savedPosition
-		} else {
-			if (from.meta.keepAlive) {
-				from.meta.savedPosition = document.body.scrollTop;
-			}
-		    return { x: 0, y: to.meta.savedPosition ||0}
-		}
-	}
-})
-
-new Vue({
+const vm = new Vue({
 	router,
 	store,
-}).$mount('#app')
+  render: h => h(App),
+}).$mount('#app');
+
 

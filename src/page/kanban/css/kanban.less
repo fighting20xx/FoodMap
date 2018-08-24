@@ -1,0 +1,217 @@
+html {
+	font-size: 12px;
+}
+
+
+.kanban-page {
+	font-size: 1rem;
+	color: #fff;
+	height: 100%;
+	animation: kanbanBackground 15s linear infinite;
+	background:#000 url(../img/bg.png) 0 -700px no-repeat;
+	display: flex;
+	flex-direction: column;
+
+
+	@keyframes kanbanBackground {
+		from {
+			background-position: 0 -700px;
+		}
+		25% {
+			background-position: -50px -750px;
+		}
+		50% {
+			background-position: -75px -700px;
+		}
+		75% {
+			background-position: -25px -750px;
+		}
+		to {
+			background-position: 0 -700px;
+		}
+	}
+
+
+	.kanban-head {
+		.kanban-title {
+			font-size: 2rem;
+			font-weight: normal;
+			text-align: center;
+			text-shadow: 7px 7px 5px #000;
+			padding-top: 0.75rem;
+			margin: 0;
+		}
+		.date {
+			position: absolute;
+			right: 2rem;
+			top: 2rem;
+			color: #5c7f9e;
+			text-shadow: 7px 7px 5px #000;
+		}
+	}
+
+	.head-line {
+		height: 1.5rem;
+		background: url(../img/head-line.png) center -470px no-repeat;
+		opacity: .3;
+	}
+
+
+	.kanban-body {
+		flex: 1;
+		overflow: hidden;
+		background-color: rgba(0, 0, 0, .4);
+		margin: .25rem 2rem 2rem;
+		display: flex;
+
+		.body-wrap {
+			height: 100%;
+			overflow: hidden;
+		}
+
+	}
+
+
+	.page-wrap {
+		height: 100%;
+		display: flex;
+		flex-direction: ceil;
+		justify-content: space-between;
+
+		.sidebar {
+			width: 15%;
+		}
+		.main {
+			width: 80%;
+		}
+	}
+
+
+	.ivu-col {
+		height: 100%;
+	}
+
+
+	.table-wrap {
+		&.valign {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+	}
+	.ivu-table {
+		color: #fff;
+		font-size: 1.25rem;
+		background-color: rgba(255, 255, 255, .1);
+	}
+	.ivu-table thead tr {
+		background-color: rgba(255, 255, 255, .3);
+	}
+	.ivu-table th,
+	.ivu-table td {
+		background: transparent;
+	}
+	.ivu-table tbody tr {
+		&.error {
+			animation: errorColorFlash 1.5s infinite;
+		}
+	}
+
+
+	@keyframes errorColorFlash {
+		from {
+			background-color: rgba(255, 0, 0, .5);
+		}
+		50% {
+			background-color: rgba(255, 0, 0, .3);
+		}
+		to {
+			background-color: rgba(255, 0, 0, .5);
+		}
+	}
+
+
+	.padding {
+		padding: 3rem;
+	}
+	.marginLeft {
+		margin-left: 3rem;
+	}
+
+	.colorBlock-wrap {
+		display: flex;
+		flex-direction: column;
+		justify-content: space-between;
+
+		&.row {
+			flex-direction: row;
+			padding-bottom: 5%;
+
+			.colorBlock {
+				height: 100%;
+				width: 30%;
+				padding: 1rem;
+
+				strong,
+				span {
+					white-space: nowrap;
+				}
+				strong {
+					font-size: 1.5rem;
+				}
+				span {
+					font-size: 2.5rem;
+				}
+			}
+		}
+	}
+	.colorBlock {
+		color: #fff;
+		text-align: center;
+		padding: .5rem;
+		background-color: rgba(255, 255, 255, .4);
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		&.passPercent {
+			background-color: rgba(169, 206, 49, .5);
+		}
+		&.plan {
+			background-color: rgba(173, 49, 206, 0.5);
+		}
+		&.produce {
+			background-color: rgba(0, 140, 255, .5);
+		}
+		&.pass {
+			background-color: rgba(19, 253, 19, .5);
+		}
+		&.bad {
+			background-color: rgba(183, 28, 48, .5);
+		}
+		&.progress {
+			background-color: rgba(49, 179, 206, .5);
+		}
+
+		strong {
+			font-weight: normal;
+			display: block;
+		}
+		span {
+			width: 60%;
+			font-size: 1.8rem;
+		}
+		i {
+			font-style: normal;
+			font-size: 2rem;
+
+			&.up {
+				color: #00ff00;
+			}
+			&.down {
+				color: red;
+			}
+		}
+	}
+}
