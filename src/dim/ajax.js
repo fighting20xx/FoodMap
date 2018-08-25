@@ -1,26 +1,26 @@
 import axios from 'axios';
 import API_PATH_DIM from '@/dim/apiPath';
-import utiljs from '@/libs/util.min';
+import utiljs from '@/util/util.min';
 
 
 const Ajax = {
 	/**
 	 * Vue 注册方法。
-	 * 
-	 * @param {Vue} Vue 
+	 *
+	 * @param {Vue} Vue
 	 */
 	install(Vue) {
 		/**
 		 * Ajax 全局引用。
 		 * 如 this.$ajax('oauth').get('user/getList');
-		 * 
+		 *
 		 * @param {String} sSource 使用的接口源，oauth、vs、iot……
 		 * @param {Object|undefined} oOptions {token, timeout}
 		 *	<ol>
 		 *		<li>token: 使用特定的 token。</li>
 		 *		<li>timeout: 请求超时时间。</li>
 		 *	</ol>
-		 * 
+		 *
 		 * @return {Axios} 返回的是一个伪 Axios 对象。
 		 */
 		Vue.prototype.$ajax = function(sSource, oOptions = {}) {
@@ -28,7 +28,7 @@ const Ajax = {
 			let nTimeout = oOptions.timeout || 30 * 1000;
 			// token。
 			let oStore = this.$store;
-			let sToken = oOptions.token || (oStore && (oStore.state.user.token || oStore.getters.tokenFromCookie));
+			let sToken = '' ; //oOptions.token || (oStore && (oStore.state.user.token || oStore.getters.tokenFromCookie));
 
 
 			// 接口源基础地址。
@@ -55,8 +55,8 @@ const Ajax = {
 						if (!oArg.params) {
 							oArg.params = {};
 						}
-						
-		
+
+
 						// 强制设置 token 参数。
 						Object.assign(oArg.params, {
 							token: sToken

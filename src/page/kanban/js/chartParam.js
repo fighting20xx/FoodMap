@@ -6,11 +6,11 @@
 // const color4 ='#00BCBC';
 // const color5 ='#9803FD';
 const COLOR_ARRY =['#D30050','#FFB508','#01B4D2','#00BCBC','#9803FD'];
-const COLOR_AXIS = '#fff';
-const COLOR_splitLine = '#fff';
-const COLOR_FONT = '#DBDADE';
+const COLOR_AXIS = '';
+const COLOR_splitLine = '';
+const COLOR_FONT = '';
 
-const ROOT_EM = 16;
+const ROOT_EM = 12;
 const FONT_LABEL_SIZE = 0.85 * ROOT_EM;
 const FONT_VALUE_SIZE = 1.25 * ROOT_EM;
 const BORDER_WIDTH = 3;

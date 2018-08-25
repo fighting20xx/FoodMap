@@ -16,7 +16,7 @@
 
 <script>
 import './css/kanban.less';
-import utiljs from '@/libs/util.min';
+import utiljs from '@/util/util.min';
 import echarts from 'echarts';
 
 
@@ -47,7 +47,7 @@ export default {
 	methods: {
 		/**
 		 * 设置自动刷新时间。
-		 * 
+		 *
 		 * @return {void}
 		 */
 		refreshTime() {
@@ -66,7 +66,7 @@ export default {
 		/**
 		 * 设置页面重置大小事件。
 		 * 触发后会派发 on-resize。
-		 * 
+		 *
 		 * @return {void}
 		 */
 		resizeEvent() {

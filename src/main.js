@@ -1,14 +1,16 @@
 import Vue from 'vue'
+import iView from 'iview';
 import router from '@/router/index'
 import store from './store/'
 
 import './config/rem'
 import FastClick from 'fastclick'
 import App from './App.vue'
-import iview from 'iview';
+import Ajax from '@/dim/ajax';
+import 'iview/dist/styles/iview.css';
 
-
-Vue.use(iview);
+Vue.use(iView);
+Vue.use(Ajax);
 
 
 

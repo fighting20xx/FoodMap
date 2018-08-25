@@ -5,6 +5,7 @@
 		box-sizing: border-box;
 		width:  100% ;
 		height: 100%;
+    background-color: rgba(21,50,88,0.1);
 		.editPage {
 			height: 100%;
 			width: 100%;
@@ -54,23 +55,24 @@
 					<RadioGroup v-model= caseProp.layout type="button" @on-change="layoutChange"  v-if="!isEdit">
 						<Radio class="layout-button" v-for="layout,index in pageLayoutType" :label=layout.type :key="index"><layoutIcon :pageLayout=layout.type></layoutIcon></Radio>
 					</RadioGroup>
-                    <Input v-model="caseProp.name" style="width: 30%" placeholder="请输入名称">
-                        <span slot="prepend">页面名称</span>
-                    </Input>
+          <Input v-model="caseProp.name" style="width: 30%" placeholder="请输入名称">
+              <span slot="prepend">页面名称</span>
+          </Input>
 					<Button type="primary" @click=submitDo>保存</Button>
-				</div>
 
-				<!--<div class="layoutItem" v-for="item in layout">-->
-					<!--<b>{{item.i}}</b>: [{{item.x}}, {{item.y}}, {{item.w}}, {{item.h}}]-->
-                    <!--</div>-->
+
+          <Checkbox v-model="draggable">Draggable</Checkbox>
+          <Checkbox v-model="resizable">Resizable</Checkbox>
+          <Button   @click="addItem">添加一个元素 </Button>
+				</div>
 				<div class="content-wrap" >
 					<grid-layout
 							v-if="rowHeight > 0"
 							:layout="layout"
 							:col-num="24"
 							:row-height="rowHeight"
-							:is-draggable="true"
-							:is-resizable="true"
+							:is-draggable="draggable"
+							:is-resizable="resizable"
 							:is-mirrored="false"
 							:vertical-compact="true"
 							:margin="[0, 0]"
@@ -84,7 +86,7 @@
 								   :i="item.i" :key="item.i">
 
 							<div class="content-item" >
-								<singleChart v-if="isEdit"  :position="'position_'+caseProp.id+'_'+item.i" :dataSourceList=dataSourceList :parentId=caseProp.id ref="single"></singleChart>
+								<singleChart v-if="isEdit"  :position="'position_'+caseProp.id+'_'+item.i" :i="item.i" :dataSourceList=dataSourceList :parentId=caseProp.id ref="single" @deleteSelf="deleteOneItem"></singleChart>
 							</div>
 						</grid-item>
 					</grid-layout>
@@ -131,6 +133,8 @@
 					{"x":0,"y":20,"w":12,"h":40,"i":"2"},
 					{"x":12,"y":20,"w":12,"h":40,"i":"3"},
 				],
+        draggable: true,
+        resizable: true,
 				rowHeight:0,
 				showPage:1,
 				caseProp:{
@@ -168,7 +172,8 @@
 				}, {
 					title: '布局方式',
 					key: 'layout'
-				}, {
+				},
+                {
 					title: '预览页面',
 					render: (h, params) => {
 						return [
@@ -188,7 +193,8 @@
 							}, '预览'),
 						];
 					}
-				}, {
+				},
+                {
 					title: '操作',
 					width: 200,
 					render: (h, params) => {
@@ -600,7 +606,27 @@
 				let hight = this.$refs['videowall-device-page'].offsetHeight-40;
 				this.rowHeight =  parseFloat((hight/800).toFixed(2)* 10);
 
-			}
+			},
+            addItem: function() {
+				var max = 0;
+				this.layout.forEach(function (item) {
+                   if (parseInt(item.i) > max) {
+                   	    max = parseInt(item.i);
+                   }
+				});
+                var newItem = {"x":0,"y":0,"w":12,"h":40,"i": max+1};
+                this.layout.push(newItem);
+            },
+
+			deleteOneItem: function(i) {
+				const self= this;
+				self.layout.forEach(function (item) {
+                   if ( (item.i)  ===  i) {
+					   self.layout.splice(self.layout.indexOf(item));
+                   }
+				});
+
+            },
 
 		}
 	};

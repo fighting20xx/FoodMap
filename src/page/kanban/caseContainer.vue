@@ -1,7 +1,8 @@
 <style lang="less" scoped>
 
 	.contain-main{
-		flex: 1;
+		height: 100%;
+        width: 100%;
 		margin: 0;
 		padding: 0;
 
@@ -15,8 +16,6 @@
 
 </style>
 <template>
-	<kanban :title="caseProp.name"  ref="kanban"
-			@on-resize="resize">
 		<div class="contain-main" ref="HeightWrap" id="HeightWrap" >
 			<grid-layout
 					v-if="caseProp.id != '' && rowHeight > 0 "
@@ -42,7 +41,6 @@
 			</grid-layout>
 		</div>
 
-	</kanban>
 </template>
 
 <script>
@@ -54,7 +52,7 @@
 	import kanban from './kanban-temp';
 	import {GridLayout,GridItem} from 'vue-grid-layout';
 	import './css/kanban.less';
-	import utiljs from '@/libs/util.min';
+	import utiljs from '@/util/util.min';
 
 
 	export default {
