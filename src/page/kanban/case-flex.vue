@@ -547,6 +547,16 @@
 					}
 				});
 
+				_this.createChart(list);
+			},
+            /**
+			 * 创建所有的chart图。
+			 *
+			 * @return {void}
+			 */
+
+			createChart(list) {
+				var _this = this;
 				this.$ajax(AJAX_VS_NODE).post('kanban/chart/createAll',list).then(oAjax => {
 					let oAjaxData = oAjax.data;
 					if (oAjaxData[CODE_KEY] != SUCCESS_CODE) {
@@ -614,8 +624,15 @@
                    	    max = parseInt(item.i);
                    }
 				});
-                var newItem = {"x":0,"y":0,"w":12,"h":40,"i": max+1};
+				var newI = (max+1)+'';
+                var newItem = {"x":0,"y":0,"w":12,"h":40,"i":newI};
                 this.layout.push(newItem);
+                this.createChart([{
+					position:'position_'+this.caseProp.id+'_'+(newI),
+					parentId:this.caseProp.id,
+					chartType:'bar',
+					sql:'select 1 ',
+				}])
             },
 
 			deleteOneItem: function(i) {

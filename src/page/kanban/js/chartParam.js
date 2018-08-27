@@ -8,7 +8,7 @@
 const COLOR_ARRY =['#D30050','#FFB508','#01B4D2','#00BCBC','#9803FD'];
 const COLOR_AXIS = '';
 const COLOR_splitLine = '';
-const COLOR_FONT = '';
+const COLOR_FONT = '#000';
 
 const ROOT_EM = 12;
 const FONT_LABEL_SIZE = 0.85 * ROOT_EM;
@@ -76,7 +76,7 @@ const LEGENT = {
 const GRID =  {
 		left: '0%',
 		right: '2%',
-		bottom: '0%',
+		bottom: '5%',
 		top: '8%',
 		containLabel: true
 	};

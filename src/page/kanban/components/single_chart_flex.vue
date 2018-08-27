@@ -255,50 +255,51 @@
    */
 
   function preDealData(vm,li) {
-    let list = utiljs.clone(li) || [];
+    let list = JSON.parse(JSON.stringify(li)) || [];
     let key_xaxis = '';
     let keys_series = [];
     let structData = {
       x_data:[],
       series:{},
-      legent :[]
+      legend :[]
     };
 
     if (list.length) {
       key_xaxis = canBeXaxis(list[0]);
       keys_series = canBeNumber(list[0]);
+      if (keys_series.indexOf(key_xaxis) > -1) {
+		  keys_series.splice(keys_series.indexOf(key_xaxis),1)
+      }
     }
     if (vm.chartType == 'bar'  || vm.chartType == 'line') {
 
       list.forEach(function (item) {
-        structData.legent.push(key_xaxis);
+        structData.legend.push(key_xaxis);
         structData.x_data.push(item[key_xaxis]);
         keys_series.forEach(function (key) {
-          let value = item[key];
+          let value = parseValue(item[key]);
           structData.series[key]
             ? structData.series[key].push(value)
-            : structData.series[key] = [parseInt(value)];
+            : structData.series[key] = [value];
         });
       });
-      structData.legent = keys_series;
+      structData.legend = keys_series;
 
     } else if (vm.chartType == 'pie'){
       list.forEach(function (item) {
-        structData.legent.push(key_xaxis);
+        structData.legend.push(key_xaxis);
 //					structData.x_data.push(item[key_xaxis]);
         keys_series.forEach(function (key) {
-          let value = item[key];
+        	let value = parseValue(item[key]);
           structData.series[key]
             ? structData.series[key].push({value:value,name:item[key_xaxis]})
             : structData.series[key] = [{value:value,name:item[key_xaxis]}];
         });
       });
-      structData.legent = keys_series;
-
-
+      structData.legend = keys_series;
     }
-	  console.log(list);
-	  console.log(structData);
+
+//    console.log(structData);
     return structData;
   }
 
@@ -313,6 +314,7 @@
     let count_series = Object.keys(structData.series).length;
     Object.keys(structData.series).map(function (item,index) {
       seriesArry.push({
+        name:item,
         type: vm.chartType,
         center: '50%',
         radius: pieSize(count_series,index),
@@ -331,19 +333,23 @@
       grid: utiljs.extends(true, ChartParam.GRID, {}),
 
       legend: utiljs.extends(true, ChartParam.LEGENT, {
-        data: structData.legent,
+        data: structData.legend,
       }),
       xAxis:utiljs.extends(true, utiljs.clone(ChartParam.AXIS_X_STYLE), {
         type: 'category',
         data: structData.x_data,
       }),
+      dataZoom: [{
+        start: 0.1,
+        end: 100,
+      }],
 
       yAxis:utiljs.extends(true, ChartParam.AXIS_Y_STYLE, {
         type: 'value',
       }),
       series: seriesArry,
     };
-    if (vm.chartType === 'pie') {delete obj.yAxis ; delete obj.xAxis }
+    if (vm.chartType === 'pie') {delete obj.yAxis ; delete obj.xAxis; delete obj.dataZoom }
     return  utiljs.clone(obj)
   }
 
@@ -354,17 +360,16 @@
 
   function canBeNumber(item) {
     let list = [];
-
     Object.keys(item).forEach(function (key) {
       let value = item[key];
-      let parseValue =  parseFloat(value);
-      if (typeof value == 'number'){
+      let parseValue =  parseInt(value);
+
+      if (typeof value === 'number'){
         list.push(key);
-      }else if (typeof value == 'string' && !isNaN(parseValue)) {
+      }else if (!isNaN(parseValue)) {
         list.push(key);
       }
     });
-	  console.log(list);
     return list;
   }
 
@@ -484,7 +489,20 @@
 
     }
     return label
+  }
 
+
+  function parseValue(str) {
+      let value = str;
+      console.log(value);
+      if (typeof value === 'number') {
+      	return value;
+      }else {
+		  while(value.indexOf(',')>-1){
+			  value = value.split(',').join('');
+		  }
+		  return parseFloat(value);
+      }
   }
 
 </script>

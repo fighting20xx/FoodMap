@@ -12,7 +12,7 @@
  */
 
 const
-	VS_NODE_API =  'http://localhost:7001/'+'api/v1/'
+	VS_NODE_API =  'http://101.132.122.2:7001/'+'api/v1/'
 
 
 ;
