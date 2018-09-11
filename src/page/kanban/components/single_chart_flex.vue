@@ -229,9 +229,27 @@
 				if (this.chartType == "table") {
 					this.tableHeight = document.querySelector('#' + this.chartId + '_height').offsetHeight;
 
-					this.tableColume = Object.keys(resultList[0]).map(function (key) {
+					var imageIndex = -1;
+					this.tableColume = Object.keys(resultList[0]).map(function (key,index) {
+						if(key === 'image'){imageIndex = index;}
 						return {title: key, key: key}
 					});
+					if(imageIndex >=0){
+						this.tableColume[imageIndex] = {
+							title: '图片',
+							render: (h, params) => {
+								return h('div',[
+									h('img', {
+										domProps: {
+											src:params.row['image'],
+											width:'60',
+											height:'40',
+										}
+									}, '图片'),
+								])
+							}
+						}
+                    }
 					this.tableData = resultList;
 					return;
 				}
@@ -501,7 +519,6 @@
 
 	function parseValue(str) {
 		let value = str;
-		console.log(value);
 		if (typeof value === 'number') {
 			return value;
 		} else {
