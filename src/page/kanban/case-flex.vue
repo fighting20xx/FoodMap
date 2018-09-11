@@ -40,7 +40,8 @@
                 <Button type="primary" @click="createDo">新增</Button>
                 <div style="float: right">
                     <InputNumber :max="5000" :min="1" v-model="pageNumber"></InputNumber>
-                    <Button @click="reFleshData">刷新数据</Button>
+                    <Button @click="reFleshData">刷新ES数据</Button>
+                    <Button @click="refreshXSFCdata">刷新XS数据</Button>
                     <Modal
                             v-model="showProcess"
                             title="数据加载进度"
@@ -624,7 +625,6 @@
 			 * @return {void}
 			 */
 			reFleshData() {
-				this.refreshXSFCdata();
 				this.showProcess = true;
 				this.socket.emit('reFleshData', this.pageNumber);
 			},
