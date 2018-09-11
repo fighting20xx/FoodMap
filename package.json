@@ -32,6 +32,7 @@
     "iview": "^3.0.1",
     "lodash": "^4.17.4",
     "showdown": "^1.6.4",
+    "socket.io-client": "^2.1.1",
     "vue": "^2.1.0",
     "vue-grid-layout": "^2.1.13",
     "vue-map": "^0.1.2",

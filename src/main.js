@@ -9,6 +9,11 @@ import App from './App.vue'
 import Ajax from '@/dim/ajax';
 import 'iview/dist/styles/iview.css';
 
+// import {NODE_ROOT} from '@/dim/apiPath';
+// import VueSocketio from 'vue-socket.io';
+// import socketio from 'socket.io-client';
+//
+// Vue.use(VueSocketio, socketio(NODE_ROOT));
 Vue.use(iView);
 Vue.use(Ajax);
 

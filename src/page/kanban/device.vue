@@ -6,7 +6,7 @@
 <template>
 	<div class="kanban-device-page">
 
-		<Button v-show="!isEdit" type="primary" class="pre-button" @click="addNewItem" >新增</Button>
+		<Button  type="primary" class="pre-button" @click="reFleshData" >刷新数据</Button>
 		<Table v-show="!isEdit" :columns="fields" :data="tableList" @on-row-click="rowClick" ></Table>
 
 		<div v-show="isEdit">

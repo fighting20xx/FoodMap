@@ -12,12 +12,13 @@
  */
 
 const
-	VS_NODE_API =  'http://101.132.122.2:7001/'+'api/v1/'
-
-
+	NODE_ROOT =  'http://localhost:7001/',
+	// NODE_ROOT =  'http://101.132.122.2:7001/',
+	VS_NODE_API =  NODE_ROOT+'api/v1/'
 ;
 
 
 export default {
+	NODE_ROOT,
 	VS_NODE_API,
 };
